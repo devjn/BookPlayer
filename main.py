@@ -23,13 +23,6 @@ from player import Player
 from status_light import StatusLight
 from threading import Thread
 import subprocess
-try:
-   # Python2
-    import Tkinter as tk
-except ImportError:
-    # Python3
-    import tkinter as tk
-	
 
 class BookReader(object):
 
@@ -51,7 +44,6 @@ class BookReader(object):
         self.setup_db()
         self.player = Player(config.mpd_conn, self.status_light)
         self.setup_gpio()
-		self.setup_keyboard()
         
         
     def setup_db(self):
@@ -70,11 +62,6 @@ class BookReader(object):
         for pin in config.gpio_pins:
             GPIO.setup(pin['pin_id'], GPIO.IN, pull_up_down=GPIO.PUD_UP)
             GPIO.add_event_detect(pin['pin_id'], GPIO.FALLING, callback=getattr(self.player, pin['callback']), bouncetime=pin['bounce_time'])
-			
-			
-	def setup_keyboard(self):
-		root = tk.Tk()
-		root.bind("<Return>", self.player.toggle_pause)  
 
 
     def signal_handler(self, signal, frame):
