@@ -160,7 +160,7 @@ class BookReader(object):
 
         FNULL = open(os.devnull, 'w')
         subprocess.call(["mpc", "stop"], stdout=FNULL, stderr=subprocess.STDOUT, close_fds=True)
-        subprocess.call(["pico2wave", "-lde-DE", "-w/tmp/tts.wav", text])
+        subprocess.call(["pico2wave", "-len-US", "-w/tmp/tts.wav", text])
         FNULL = open(os.devnull, 'w')
         subprocess.call(["aplay", "/tmp/tts.wav"], stdout=FNULL, stderr=subprocess.STDOUT, close_fds=True)
         
